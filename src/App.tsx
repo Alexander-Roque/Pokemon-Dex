@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import * as React from "react"
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [email, setEmail] = React.useState ("")
+  // const [password, setPassword] = React.useState("")
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: ""
+  })
+
+  function handlerSubmit (event){
+    event.preventDefault();
+    console.log(formData)
+  }
+
+  function handlerChange (event) {
+    const {name, value} = event.target;
+    // console.log({name, value})
+    setFormData ({...formData, [name]: value})
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Welcome to Poke Collection</h1>
+      <form onSubmit={handlerSubmit}>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handlerChange}
+            placeholder="example@mail.com"
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={formData.password}
+            onChange={handlerChange}
+            placeholder="******"
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
 }
 
 export default App
+
+// Pregunar al profesor porque el token no recibe la url, el post create no recibe el token de post login
+//  ademas el repositorio no se encuentra https://github.com/codeableorg/poke-collection-c11
