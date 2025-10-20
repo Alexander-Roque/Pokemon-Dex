@@ -1,11 +1,11 @@
-const Input = ({id, name, type, value, onChange, placeholder, label}) => {
+const Input = ({id, name, type="text", value, onChange, placeholder, label}) => {
     return (
         <div>
-        <label htmlFor={id}>{label}</label>
+        {label && <label htmlFor={id || name}>{label}</label>}
         <input
             type={type}
             name={name}
-            id={id}
+            id={id || name}
             value={value}
             onChange={onChange}
             placeholder={placeholder}

@@ -1,4 +1,5 @@
 import * as React from "react"
+import Input from "./components/input";
 
 
 function App() {
@@ -24,28 +25,24 @@ function App() {
     <div>
       <h1>Welcome to Poke Collection</h1>
       <form onSubmit={handlerSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={formData.email}
-            onChange={handlerChange}
-            placeholder="example@mail.com"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={formData.password}
-            onChange={handlerChange}
-            placeholder="******"
-          />
-        </div>
+        <Input
+        id="email"
+        name="email"
+        type="email"
+        value={formData.email}
+        onChange={handlerChange}
+        placeholder="example@gmail.com"
+        label="Email"
+         />
+        <Input
+        id="password"
+        name="password"
+        type="password"
+        value={formData.password}
+        onChange={handlerChange}
+        placeholder="******"
+        label="Password"
+         />
         <button type="submit">Login</button>
       </form>
     </div>
