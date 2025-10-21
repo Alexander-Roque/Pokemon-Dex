@@ -2,6 +2,9 @@ import * as React from "react"
 import LoginForm from "./components/login-form"
 import SignupForm from "./components/Signup-Form"
 import { getUser } from "./services/User-service";
+import AuthenticatedApp from "./AuthenticatedApp";
+import UnathenticatedApp from "./UnathenticatedApp";
+import { login } from "./services/auth-service";
 
 
 
@@ -12,20 +15,13 @@ function App() {
     getUser().then(u=> setUser(u)).catch(error => console.log(error))
   }, [])
 
+    function handleLogin(credentials) {
+    login(credentials)
+      .then((u) => setUser(u))
+      .catch((error) => console.log(error));
+  }
 
-  const [showLogin, setShowLogin] = React.useState(true);
-  const handlerClick = (e) => {
-    e.preventDefault();
-    setShowLogin(!showLogin);
-  };
-
-  return (
-    <div>
-      <h1>Welcome to Poke Collection</h1>
-      {showLogin ? <LoginForm /> : <SignupForm />}
-      <button onClick={handlerClick}>{showLogin ? "Create Account" : "Log In"}</button>
-    </div>
-  )
+  return user ? <AuthenticatedApp /> : <UnathenticatedApp onLogin = {handleLogin} />
 }
 
 export default App

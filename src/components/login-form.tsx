@@ -1,8 +1,7 @@
 import * as React from "react"
-import { login } from "../services/auth-service";
 import Input from "./input";
 
-const LoginForm = () => {
+const LoginForm = (onLogin) => {
     const [formData, setFormData] = React.useState({
         email: "",
         password: ""
@@ -11,9 +10,7 @@ const LoginForm = () => {
       function handlerSubmit (event:React.FormEvent<HTMLFormElement>){
         event.preventDefault();
         console.log(formData)
-        login(formData)
-        .then(user => console.log(user))
-        .catch(error => console.log(error))
+        onLogin(formData)
       }
     
       function handlerChange (event:React.ChangeEvent<HTMLInputElement>) {
