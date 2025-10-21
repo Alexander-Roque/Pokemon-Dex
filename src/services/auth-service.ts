@@ -1,5 +1,10 @@
 import apiFetch from "./api-fetch";
+import { tokenKey } from "../config";
 
 export function login(credentials) {
-  return apiFetch("/login", { body: credentials })
+  return apiFetch("/login", { body: credentials }).then(u => {
+    const {token, ...user} = u;
+    sessionStorage.setItem(tokenKey, token);
+    return user;
+  })
 }
