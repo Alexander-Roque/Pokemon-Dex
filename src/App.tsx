@@ -1,9 +1,18 @@
 import * as React from "react"
 import LoginForm from "./components/login-form"
 import SignupForm from "./components/Signup-Form"
+import { getUser } from "./services/User-service";
+
 
 
 function App() {
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(()=>{
+    getUser().then(u=> setUser(u)).catch(error => console.log(error))
+  }, [])
+
+
   const [showLogin, setShowLogin] = React.useState(true);
   const handlerClick = (e) => {
     e.preventDefault();
@@ -15,7 +24,6 @@ function App() {
       <h1>Welcome to Poke Collection</h1>
       {showLogin ? <LoginForm /> : <SignupForm />}
       <button onClick={handlerClick}>{showLogin ? "Create Account" : "Log In"}</button>
-      <SignupForm />
     </div>
   )
 }
