@@ -1,7 +1,7 @@
 import * as React from "react"
 import LoginForm from "./components/login-form"
 import SignupForm from "./components/Signup-Form"
-import { getUser } from "./services/User-service";
+import { getUser, createUser } from "./services/User-service";
 import AuthenticatedApp from "./AuthenticatedApp";
 import UnathenticatedApp from "./UnathenticatedApp";
 import { login } from "./services/auth-service";
@@ -21,7 +21,13 @@ function App() {
       .catch((error) => console.log(error));
   }
 
-  return user ? <AuthenticatedApp /> : <UnathenticatedApp onLogin = {handleLogin} />
+    function handleSignup(userData) {
+    createUser(userData)
+      .then((u) => setUser(u))
+      .catch((error) => console.log(error));
+  }
+
+  return user ? <AuthenticatedApp /> : <UnathenticatedApp onLogin = {handleLogin} onSignup={handleSignup} />
 }
 
 export default App

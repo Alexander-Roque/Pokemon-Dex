@@ -1,7 +1,7 @@
 import * as React from "react"
 import Input from "./input";
 
-const LoginForm = (onLogin) => {
+const LoginForm = ({onLogin}) => {
     const [formData, setFormData] = React.useState({
         email: "",
         password: ""
@@ -9,8 +9,12 @@ const LoginForm = (onLogin) => {
     
       function handlerSubmit (event:React.FormEvent<HTMLFormElement>){
         event.preventDefault();
-        console.log(formData)
-        onLogin(formData)
+        console.log("onLogin:", onLogin)
+        if(typeof onLogin === "function") {
+          onLogin(formData);
+        } else {
+          console.error("onLogin no es una función")
+        }
       }
     
       function handlerChange (event:React.ChangeEvent<HTMLInputElement>) {

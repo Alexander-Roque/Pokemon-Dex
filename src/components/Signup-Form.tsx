@@ -1,9 +1,9 @@
 import * as React from "react"
 // import { login } from "../services/auth-service";
-import { createUser } from "../services/User-service";
+// import { createUser } from "../services/User-service";
 import Input from "./input";
 
-const SignupForm = () => {
+const SignupForm = ({onSignup}) => {
     const [formData, setFormData] = React.useState({
         email: "",
         password: "",
@@ -13,7 +13,7 @@ const SignupForm = () => {
     function handlerSubmit (event:React.FormEvent<HTMLFormElement>){
         event.preventDefault();
         // console.log(formData)
-        createUser(formData)
+        onSignup(formData)
         .then(user => console.log(user))
         .catch(error => console.log(error))
       }
